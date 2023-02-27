@@ -8,3 +8,9 @@ tech:
 5.backend data
 6.
 
+
+
+進度紀錄:
+2/27 - swift javascript to typescript
+     - add firebase
+     - firebase google auth
