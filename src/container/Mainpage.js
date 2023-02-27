@@ -1,6 +1,6 @@
 import React from 'react'
 import taiwanMap from "../image/map.jpg"
-import Homepage from "../container/Homepage"
+import Homepage from "../container/Homepage/Homepage"
 
 const Mainpage = () => {
     return (
