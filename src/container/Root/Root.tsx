@@ -1,11 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-// import { Wrapper } from "./Style";
+import { HeaderWrapper, Wrapper } from "./Style";
 
 const Root = () => {
   return (
-    <>
-      <div id="sidebar">
+    <Wrapper>
+      <HeaderWrapper>
         <div className="logo">Logo</div>
         <nav>
           <ul>
@@ -20,11 +20,11 @@ const Root = () => {
             </li>
           </ul>
         </nav>
-      </div>
+      </HeaderWrapper>
       <div id="detail">
         <Outlet />
       </div>
-    </>
+    </Wrapper>
   );
 };
 

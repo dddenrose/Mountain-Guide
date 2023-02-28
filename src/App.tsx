@@ -8,7 +8,6 @@ import LoginPage from "./container/LoginPage/LoginPage";
 import Root from "./container/Root/Root";
 import Homepage from "./container/Homepage/Homepage";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyD7V17yI2XCjEGW-780SZBmmP7jmf0Qg88",
   authDomain: "react-mountain-ts.firebaseapp.com",
