@@ -34,6 +34,10 @@ module.exports = {
   },
   devServer: {
     static: "./dist",
+    port: 4000,
+    hot: true, //enable webpack hot module replacement
+    open: true,
+    historyApiFallback: true,
   },
   optimization: {
     runtimeChunk: "single",

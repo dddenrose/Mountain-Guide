@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import ErrorPage from "./component/ErrorPage/ErrorPage";
