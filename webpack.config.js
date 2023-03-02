@@ -25,7 +25,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Output Management",
+      template: path.resolve(__dirname, "src/index.html"),
+      title: "Mountain Guide",
     }),
   ],
   resolve: {
