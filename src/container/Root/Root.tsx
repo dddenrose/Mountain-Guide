@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { HeaderWrapper, Wrapper } from "./Style";
 
 const Root = () => {
@@ -10,13 +10,13 @@ const Root = () => {
         <nav>
           <ul>
             <li>
-              <a href={`/homepage`}>homepage</a>
+              <Link to="homepage">homepage</Link>
             </li>
             <li>
-              <a href={`/auth`}>auth</a>
+              <Link to="auth">auth</Link>
             </li>
             <li>
-              <a href={`/blog`}>blog</a>
+              <Link to="blog">blog</Link>
             </li>
           </ul>
         </nav>
