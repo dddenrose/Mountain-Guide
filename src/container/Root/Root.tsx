@@ -10,7 +10,7 @@ const Root = () => {
         <nav>
           <ul>
             <li>
-              <Link to="homepage">homepage</Link>
+              <Link to="/">homepage</Link>
             </li>
             <li>
               <Link to="auth">auth</Link>

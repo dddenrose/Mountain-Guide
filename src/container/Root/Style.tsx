@@ -5,12 +5,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const HeaderWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
+  padding: 24px;
   .logo {
     flex: 1;
   }
