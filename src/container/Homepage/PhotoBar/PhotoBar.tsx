@@ -13,31 +13,31 @@ const PhotoBar = () => {
       <Style.ImageWrapper>
         <img src={bar_1} className="image" />
         <div>
-          <div>
+          <Style.InfoWrapper>
             <h1>Take a walk with mountain.</h1>
             <span>{infoContent}</span>
-          </div>
-          <button>Click</button>
+          </Style.InfoWrapper>
+          <Style.Button>More</Style.Button>
         </div>
       </Style.ImageWrapper>
       <Style.ImageWrapper>
         <div>
-          <div>
+          <Style.InfoWrapper style={{marginBottom: '32px'}}>
             <h1>Take a walk with mountain.</h1>
             <span>{infoContent}</span>
-          </div>
-          <button>Click</button>
+          </Style.InfoWrapper>
+          <Style.Button>More</Style.Button>
         </div>
         <img src={bar_2} className="image left" />
       </Style.ImageWrapper>
       <Style.ImageWrapper>
         <img src={bar_3} className="image" />
         <div>
-          <div>
+          <Style.InfoWrapper>
             <h1>Take a walk with mountain.</h1>
             <span>{infoContent}</span>
-          </div>
-          <button>Click</button>
+          </Style.InfoWrapper>
+          <Style.Button>More</Style.Button>
         </div>
       </Style.ImageWrapper>
     </Style.ImageContainer>

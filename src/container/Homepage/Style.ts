@@ -17,7 +17,7 @@ export const IconsWrapper = styled.div`
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  margin: 0px 0px 64px;
+  margin: 0px 0px 104px;
   width: 100%;
 `;
 
@@ -30,4 +30,9 @@ export const IconWrapper = styled.div`
   align-items: center;
   flex: 1 1 0%;
   font-size: 18px;
+  svg {
+    font-size: 48px;
+    color: burlywood;
+    margin-bottom: 8px;
+  }
 `;

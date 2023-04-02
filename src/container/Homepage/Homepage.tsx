@@ -28,7 +28,7 @@ const HomePage = ({ app }: { app: any }) => {
           Look Forward it
         </div>
       </FlexBox>
-      <Style.IconsWrapper direction="row" margin="0 0 64px 0">
+      <Style.IconsWrapper>
         <Style.IconWrapper>
           <LandscapeIcon/>
           Mountain Explore

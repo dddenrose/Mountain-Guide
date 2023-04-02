@@ -7,6 +7,7 @@ import BlogPage from "./container/BlogPage/BlogPage";
 import LoginPage from "./container/LoginPage/LoginPage";
 import Root from "./container/Root/Root";
 import Homepage from "./container/Homepage/Homepage";
+import MapPage from "./container/MapPage/MapPage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD7V17yI2XCjEGW-780SZBmmP7jmf0Qg88",
@@ -41,6 +42,11 @@ function App() {
         {
           path: "auth",
           element: <LoginPage app={app} />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "map",
+          element: <MapPage/>,
           errorElement: <ErrorPage />,
         },
       ],

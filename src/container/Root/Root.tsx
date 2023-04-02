@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { HeaderWrapper, Wrapper } from "./Style";
+import Footer from "../../component/Footer/Footer";
 
 const Root = () => {
   return (
@@ -18,11 +19,15 @@ const Root = () => {
             <li>
               <Link to="blog">blog</Link>
             </li>
+            <li>
+              <Link to="map">map</Link>
+            </li>
           </ul>
         </nav>
       </HeaderWrapper>
       <div id="detail">
         <Outlet />
+        <Footer />
       </div>
     </Wrapper>
   );
