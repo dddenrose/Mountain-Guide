@@ -25,7 +25,14 @@ const Root = () => {
           </ul>
         </nav>
       </HeaderWrapper>
-      <div id="detail">
+      <div
+        id="detail"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Outlet />
         <Footer />
       </div>
