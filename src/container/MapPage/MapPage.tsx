@@ -3,15 +3,106 @@ import africaMap from "../../image/africa.svg";
 import * as Style from "./Style";
 
 const MapPage = () => {
+  const [viewPort, setViewPort] = React.useState({
+    width: 1000,
+    height: 850,
+  });
+  const [viewBox, setViewBox] = React.useState({
+    x: 0,
+    y: 200,
+    width: 500,
+    height: 500,
+  });
+  const [mousePosition, setMousePosition] = React.useState({
+    x: 0,
+    y: 0,
+  });
+  const mapRef = React.useRef<HTMLDivElement>(null);
+  const [isMouseMove, setIsMouseMove] = React.useState(false);
+  const [mountainData, setMountainData] = React.useState({
+    title: "",
+    info: "",
+  });
+
+  const onMouseDown = (event: any) => {
+    setIsMouseMove(true);
+    setMousePosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+
+  const onMouseUp = () => {
+    setIsMouseMove(false);
+  };
+
+  const handleWindowMouseMove = (event: any) => {
+    if (isMouseMove) {
+      setMousePosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+      const xMove =
+        event.clientX - mousePosition.x < 0
+          ? Math.abs(event.clientX - mousePosition.x)
+          : -Math.abs(event.clientX - mousePosition.x);
+
+      const yMove =
+        event.clientY - mousePosition.y < 0
+          ? Math.abs(event.clientY - mousePosition.y)
+          : -Math.abs(event.clientY - mousePosition.y);
+
+      setViewBox({
+        ...viewBox,
+        x: viewBox.x + xMove,
+        y: viewBox.y + yMove,
+      });
+    }
+  };
+  const svg = document.getElementById("svg");
+
+  const handleOnWheel = (event: any) => {
+    if (mapRef?.current?.offsetLeft) {
+      let r = 1;
+
+      if (event.deltaY > 0) {
+        r = 0.9;
+      } else if (event.deltaY < 0) {
+        r = 1.1;
+      } else {
+        r = 1;
+      }
+      setViewBox({
+        ...viewBox,
+        width: viewBox.width * r,
+        height: viewBox.height * r,
+      });
+    }
+  };
+
+  const handleLocationOnClick = (title: string, info: string) => {
+    setMountainData({
+      title,
+      info,
+    });
+  };
+
   return (
     <Style.MainWrapper>
-      <Style.MapWrapper>
+      <Style.MapWrapper
+        ref={mapRef}
+        id="mapWrapper"
+        onMouseMove={handleWindowMouseMove}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onWheel={(event: any) => handleOnWheel(event)}
+      >
         <svg
           id="svgElement"
           xmlns="http://www.w3.org/2000/svg"
-          width="1200"
-          height="1200"
-          viewBox="0 200 500 500"
+          width={viewPort.width}
+          height={viewPort.height}
+          viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
         >
           <g id="圖層_1" data-name="圖層 1">
             <path
@@ -85,9 +176,6 @@ const MapPage = () => {
               className="cls-1"
               d="M161.6,366.7l.1,3.6-4.3,1.6-1.2,2.9.5,4-2,4.6-1.6,5.4-.1,5.7-1.2,6.6-.9,13.4,2.1,6.3,3.6,3.3,3.9,1.4,5.6,2.9-1,3.5-3.8,1.5-2.5,2.3-2.4,1.6-1,.7-12-2.4-5.8.1-12.2-6-19.7-2.3L94.1,423l-6.6-1.8-7.6-.4-22,2.6L50.3,419l.8-1.4,1.6-7.1,1.2-3,7.1-6.8,2-2.8,2.7-7.8,4.2-7.7,5.7-16.1,2.7-4.7,3-3,2.5-1.7,2.2-1.1,1.6-1.4.6-3,1.2-2.8,5.1-4,1.2-3,.6-10.1.9-2.8,2.7-2.6,11.3-13.2,5.8,1.9,4,3.5,2.7,6.3,1,7.6,4.5,5.4,11.9,3.5,4.3,3.6,3.2,5,2,4,.1,4,1.2,3.3,4.3.8,5.4,3.5v1.4Z"
               transform="translate(1 1)"
-              onClick={() => {
-                console.log("hello");
-              }}
             />
             <path
               id="TWN1170"
@@ -141,7 +229,7 @@ const MapPage = () => {
               />
               <circle className="cls-2" cx="349.22" cy="283.79" r="1.25" />
             </g>
-            <g id="_022-南湖北山" data-name="022-南湖北山">
+            <g id="_022-南湖北山" data-name="022-南湖北山" onClick={() => handleLocationOnClick("022-南湖北山", "022-南湖北山022-南湖北山022-南湖北山")}>
               <path
                 className="cls-2"
                 d="M358.32,256.66a2.76,2.76,0,0,1,.13-2.3,2.87,2.87,0,0,1,5.26,2.3l-.14.3-2.16,3.57a.47.47,0,0,1-.79,0L358.46,257Z"
@@ -888,8 +976,11 @@ const MapPage = () => {
           </g>
         </svg>
       </Style.MapWrapper>
-      <div>
-        testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+      <div style={{ width: 800 }}>
+        <h1>
+          {mountainData.title}
+        </h1>
+        <h5>{mountainData.info}</h5>
       </div>
     </Style.MainWrapper>
   );

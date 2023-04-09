@@ -12,6 +12,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 24px;
+  margin-bottom: 80px;
   .logo {
     flex: 1;
   }

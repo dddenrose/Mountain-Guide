@@ -15,5 +15,6 @@ export const MapWrapper = styled.div`
 
 export const MainWrapper = styled.div`
   display: flex;
-  margin-top: 80px;
+  margin-bottom: 80px;
+  /* min-height: calc(100% - 69px -181px); */
 `;

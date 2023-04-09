@@ -27,6 +27,7 @@ const Root = () => {
       </HeaderWrapper>
       <div
         id="detail"
+        className="detail"
         style={{
           display: "flex",
           flexDirection: "column",
