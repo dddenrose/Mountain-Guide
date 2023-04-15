@@ -1,9 +1,11 @@
 import React from "react";
 import africaMap from "../../image/africa.svg";
+import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import * as Style from "./Style";
 import { mountainList, taiwanCountry } from "./const";
+import { async } from "q";
 
-const MapPage = () => {
+const MapPage = ({ db }: any) => {
   const [viewPort, setViewPort] = React.useState({
     width: 1000,
     height: 850,
@@ -25,18 +27,60 @@ const MapPage = () => {
     title: "",
     info: "",
   });
+  const [mouseOverTarget, setMouseOverTarget] = React.useState("");
 
   React.useEffect(() => {
-    const init = () => {
-      const mapResult = mountainList.map((ele: any) => (
-        <g id={ele.id} data-name={ele.dataName}>
-          <path className={ele.className} d={ele.d} transform={ele.transform} />
-          <circle className={ele.className} cx={ele.cs} cy={ele.cy} r={ele.r} />
-        </g>
-      ));
-      setMapResult(mapResult);
+    console.log(db, "====db");
+
+    const init = async () => {
+      if (db) {
+        const citiesRef = collection(db, "cities");
+
+        await setDoc(doc(citiesRef, "SF"), {
+          name: "San Francisco",
+          state: "CA",
+          country: "USA",
+          capital: false,
+          population: 860000,
+          regions: ["west_coast", "norcal"],
+        });
+        await setDoc(doc(citiesRef, "LA"), {
+          name: "Los Angeles",
+          state: "CA",
+          country: "USA",
+          capital: false,
+          population: 3900000,
+          regions: ["west_coast", "socal"],
+        });
+        await setDoc(doc(citiesRef, "DC"), {
+          name: "Washington, D.C.",
+          state: null,
+          country: "USA",
+          capital: true,
+          population: 680000,
+          regions: ["east_coast"],
+        });
+        await setDoc(doc(citiesRef, "TOK"), {
+          name: "Tokyo",
+          state: null,
+          country: "Japan",
+          capital: true,
+          population: 9000000,
+          regions: ["kanto", "honshu"],
+        });
+        await setDoc(doc(citiesRef, "BJ"), {
+          name: "Beijing",
+          state: null,
+          country: "China",
+          capital: true,
+          population: 21500000,
+          regions: ["jingjinji", "hebei"],
+        });
+      }
     };
-  }, []);
+
+    init();
+  }, [db]);
 
   const onMouseDown = (event: any) => {
     setIsMouseMove(true);
@@ -91,7 +135,7 @@ const MapPage = () => {
       (ele: any) => ele.dataName !== dataName
     );
     const find = mountainListData.find((ele: any) => ele.dataName === dataName);
-    return [find, ...tempResult];
+    return [...tempResult, find];
   };
 
   const handleLocationOnClick = (title: string, info: string) => {
@@ -102,6 +146,19 @@ const MapPage = () => {
       title,
       info,
     });
+  };
+
+  const handleOnMouseOver = (title: string) => {
+    const sortResult = sortMountainList(title);
+    setMountainListData(sortResult);
+    setMouseOverTarget(title);
+  };
+
+  const targetTag = (dataName: string) => {
+    if (dataName === mouseOverTarget) {
+      return "target";
+    }
+    return "";
   };
 
   return (
@@ -141,14 +198,15 @@ const MapPage = () => {
                 onClick={() =>
                   handleLocationOnClick(ele.dataName, ele.dataName)
                 }
+                onMouseOver={() => handleOnMouseOver(ele.dataName)}
               >
                 <path
-                  className={ele.className}
+                  className={`${ele.className} ${targetTag(ele.dataName)}`}
                   d={ele.d}
                   transform={ele.transform}
                 />
                 <circle
-                  className={ele.className}
+                  className={`${ele.className} ${targetTag(ele.dataName)}`}
                   cx={ele.cx}
                   cy={ele.cy}
                   r={ele.r}

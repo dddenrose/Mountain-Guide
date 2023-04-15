@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 import ErrorPage from "./component/ErrorPage/ErrorPage";
 import BlogPage from "./container/BlogPage/BlogPage";
 import LoginPage from "./container/LoginPage/LoginPage";
@@ -21,6 +22,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 function App() {
   const router = createBrowserRouter([
@@ -46,7 +48,7 @@ function App() {
         },
         {
           path: "map",
-          element: <MapPage/>,
+          element: <MapPage db={db}/>,
           errorElement: <ErrorPage />,
         },
       ],

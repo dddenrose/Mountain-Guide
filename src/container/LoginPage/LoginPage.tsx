@@ -4,10 +4,15 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const LoginPage = ({ app }: { app: {} }) => {
   const [userInfo, setUserInfo] = React.useState(null);
+  const [displayUserInfo, setDisplayUserInfo] = React.useState<any>({
+    name: "",
+    email: "",
+  });
   const provider = new GoogleAuthProvider();
   provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
   provider.setCustomParameters({
@@ -16,8 +21,16 @@ const LoginPage = ({ app }: { app: {} }) => {
   const auth = getAuth();
 
   React.useEffect(() => {
-    console.log("------auth", auth);
-  }, [auth]);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setDisplayUserInfo({
+          name: user.displayName,
+          email: user.email,
+        });
+      } else {
+      }
+    });
+  }, []);
 
   const signIn = () => {
     signInWithPopup(auth, provider)
@@ -60,8 +73,8 @@ const LoginPage = ({ app }: { app: {} }) => {
     <div>
       Login Page
       <div>
-        userName: {auth?.currentUser?.displayName || "none"}
-        email: {auth?.currentUser?.email || "none"}
+        userName: {displayUserInfo.name || "none"}
+        email: {displayUserInfo.email || "none"}
       </div>
       <button onClick={signIn}>Login</button>
       <button onClick={signOutUser}>signOutUser</button>

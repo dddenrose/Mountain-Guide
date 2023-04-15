@@ -11,6 +11,11 @@ export const MapWrapper = styled.div`
     fill: white;
     stroke: black;
   }
+
+  .target {
+    fill: white;
+    stroke: firebrick;
+  }
 `;
 
 export const MainWrapper = styled.div`
